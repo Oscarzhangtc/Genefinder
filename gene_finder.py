@@ -61,11 +61,11 @@ def get_reverse_complement(dna):
         complement = get_complement(letter)
         # call the get_comperest_of_ORflement functoin prior
         reverse_list_complement.insert(0,complement)
-        reverse_complement = ''.join(list_reverse_complement)
+        reverse_complement = ''.join(reverse_list_complement)
     return reverse_complement
     # TODO: implement this
     pass
-
+    
 
 def rest_of_ORF(dna):
     """ Takes a DNA sequence that is assumed to begin with a start
@@ -148,8 +148,8 @@ def find_all_ORFs(dna):
     ['ATGCATGAATGTAG', 'ATGAATGTAG', 'ATG']
     """
     orf_list = []
-    for a in range(0,3):
-        dna1=dna[a:]
+    for a in range(0 , 3):
+        dna1= dna[a: ]
         orf1 = find_all_ORFs_oneframe(dna1)
         orf_list.extend(orf1)
 
