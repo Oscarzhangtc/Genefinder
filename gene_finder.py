@@ -2,7 +2,7 @@
 """
 YOUR HEADER COMMENT HERE
 
-@author: YOUR NAME HERE
+@author: Oscar Zhang
 
 """
 
@@ -30,6 +30,15 @@ def get_complement(nucleotide):
     >>> get_complement('C')
     'G'
     """
+    if (nucleotide == 'A'):
+        complement = 'T'
+    if (nucleotide == 'T'):
+        complement = 'A'
+    if (nucleotide == 'C'):
+        complement = 'G'
+    if (nucleotide == 'G'):
+        complement = 'C'
+    return complement
     # TODO: implement this
     pass
 
@@ -39,12 +48,21 @@ def get_reverse_complement(dna):
         sequence
 
         dna: a DNA sequence represented as a string
-        returns: the reverse complementary DNA sequence represented as a string
+        returns: the reverserest_of_ORf complementary DNA sequence represented as a string
     >>> get_reverse_complement("ATGCCCGCTTT")
-    'AAAGCGGGCAT'
+    'AAAGCGGGCAT'rest_of_ORf
     >>> get_reverse_complement("CCGCGTTCA")
     'TGAACGCGG'
     """
+    reverse_list_complement=[]
+        # set list to a blank array
+    for letter in dna:
+
+        complement = get_complement(letter)
+        # call the get_comperest_of_ORflement functoin prior
+        reverse_list_complement.insert(0,complement)
+        reverse_complement = ''.join(list_reverse_complement)
+    return reverse_complement
     # TODO: implement this
     pass
 
@@ -62,6 +80,17 @@ def rest_of_ORF(dna):
     >>> rest_of_ORF("ATGAGATAGG")
     'ATGAGA'
     """
+    i=0
+    stop = len(dna)
+    while i <= (stop/3):
+        if (dna[ 3 * i : 3 * i + 3]== 'TAG' or dna[ 3 * i : 3 * i + 3]=='TGA' or dna[3*i:3*i+3]=='TAA'):
+            stop = i*3
+            break
+
+        else:
+            i+=1
+    return dna[:stop]
+
     # TODO: implement this
     pass
 
@@ -79,6 +108,28 @@ def find_all_ORFs_oneframe(dna):
     >>> find_all_ORFs_oneframe("ATGCATGAATGTAGATAGATGTGCCC")
     ['ATGCATGAATGTAGA', 'ATGTGCCC']
     """
+    one_frame = []
+    start_codon = 'ATG'
+    start_point = -1
+    while len(dna) / 3 >= 1:
+        i = 0
+        while i < = len (dna) / 3:
+            if (dna[i * 3 : i * 3 + 3] == start_codon):
+                start_point = 3 * i
+                break
+            else:
+                i += 1
+        if (start_point != -1):
+            dna = dna[start_point:]
+        else:
+            return one_frame
+        orf = rest_of_ORF(dna)
+        rest_len = len(dna) - len(orf) -3
+        start_point = len(dna) - rest_len
+        dna = dna[start_point:]
+        one_frame.append(orf)
+    one_frame = list(filter(None, one_frame))
+    return one_frame
     # TODO: implement this
     pass
 
@@ -96,6 +147,13 @@ def find_all_ORFs(dna):
     >>> find_all_ORFs("ATGCATGAATGTAG")
     ['ATGCATGAATGTAG', 'ATGAATGTAG', 'ATG']
     """
+    orf_list = []
+    for a in range(0,3):
+        dna1=dna[a:]
+        orf1 = find_all_ORFs_oneframe(dna1)
+        orf_list.extend(orf1)
+
+    return orf_list
     # TODO: implement this
     pass
 
@@ -109,6 +167,29 @@ def find_all_ORFs_both_strands(dna):
     >>> find_all_ORFs_both_strands("ATGCGAATGTAGCATCAAA")
     ['ATGCGAATG', 'ATGCTACATTCGCAT']
     """
+    # initialize the start points, and frame
+    one_frame = []
+    start_codon = 'ATG'
+    start_point = -1
+    while len(dna) /3 > 1:
+        i = 0
+        while i <= len(dna)/3:
+            if (dna[i * 3: i * 3 +3] == start_codon):
+                start_point = 3*i
+                break
+            else:
+                i += 1
+        if (start_point!=-1):
+            dna = dna[start_point:]
+        else:
+            return one_frame
+        orf = rest_of_ORF(dna)
+        rest_len = len(dna)-len(orf)-3
+        start_point = len(dna)-rest_len
+        dna = dna[start_point:]
+        one_frame.append(orf)
+    one_frame = list(filter(None, one_frame))
+    return one_frame
     # TODO: implement this
     pass
 
