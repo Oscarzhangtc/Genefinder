@@ -8,7 +8,7 @@ As explained above, a sample data DNA sequence of Salmonella is chosen for this 
 
 To start, clone the repo, and change files in /data folder to data or DNA sequence of your choice. 
 
-Before running the program, be sure to load the data:
+Before running the program, be sure to load the data in terminal:
 
 ```bash
 $ from load import load_seq
