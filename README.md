@@ -2,7 +2,7 @@
 
 DNA sequence from a sample strain of Salmonella is analyzed for any pathogenic (disease causing) genes. To do this, the program outputs snippets of DNA that are likely to be protein-coding genes—a process known as gene finding or gene prediction. 
 
-# How it works
+# Usage
 Make sure [python](https://www.python.org/downloads/) is installed on your device. 
 As explained above, a sample data DNA sequence of Salmonella is chosen for this analysis. However, any DNA sequence can be ran by this program.
 
